@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Pedidos de Aluguel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Pedidos de Aluguel</h1>
+    <a href="/pedidos/new" class="btn btn-primary mb-3">Adicionar Novo Pedido</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Data do Pedido</th>
+            <th>Data de Retirada</th>
+            <th>Data de Devolução</th>
+            <th>Cliente</th>
+            <th>Automóvel</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}"></td>
+            <td th:text="${pedido.status}"></td>
+            <td th:text="${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')}"></td>
+            <td th:text="${pedido.cliente.nome}"></td>
+            <td th:text="${pedido.automovel.modelo}"></td>
+            <td>
+                <a th:href="@{/pedidos/edit/{id}(id=${pedido.id})}" class="btn btn-sm btn-info">Editar</a>
+                <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn btn-sm btn-danger">Excluir</a>
+                <a th:href="@{/pedidos/status/{id}(id=${pedido.id})}" class="btn btn-sm btn-secondary">Ver Status</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

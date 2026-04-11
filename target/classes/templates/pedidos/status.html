@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Status do Pedido de Aluguel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Status do Pedido de Aluguel #<span th:text="${pedido.id}"></span></h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Detalhes do Pedido</h5>
+            <p class="card-text"><strong>Status:</strong> <span th:text="${pedido.status}"></span></p>
+            <p class="card-text"><strong>Data do Pedido:</strong> <span th:text="${#dates.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p class="card-text"><strong>Data de Retirada:</strong> <span th:text="${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')}"></span></p>
+            <p class="card-text"><strong>Data de Devolução:</strong> <span th:text="${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')}"></span></p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Informações do Cliente</h5>
+            <p class="card-text"><strong>Nome:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
+            <p class="card-text"><strong>CPF:</strong> <span th:text="${pedido.cliente.cpf}"></span></p>
+            <p class="card-text"><strong>RG:</strong> <span th:text="${pedido.cliente.rg}"></span></p>
+            <p class="card-text"><strong>Endereço:</strong> <span th:text="${pedido.cliente.endereco}"></span></p>
+            <p class="card-text"><strong>Profissão:</strong> <span th:text="${pedido.cliente.profissao}"></span></p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Informações do Automóvel</h5>
+            <p class="card-text"><strong>Marca:</strong> <span th:text="${pedido.automovel.marca}"></span></p>
+            <p class="card-text"><strong>Modelo:</strong> <span th:text="${pedido.automovel.modelo}"></span></p>
+            <p class="card-text"><strong>Ano:</strong> <span th:text="${pedido.automovel.ano}"></span></p>
+            <p class="card-text"><strong>Placa:</strong> <span th:text="${pedido.automovel.placa}"></span></p>
+            <p class="card-text"><strong>Matrícula:</strong> <span th:text="${pedido.automovel.matricula}"></span></p>
+        </div>
+    </div>
+
+    <a href="/pedidos" class="btn btn-secondary mt-4">Voltar para a Lista de Pedidos</a>
+</div>
+</body>
+</html>

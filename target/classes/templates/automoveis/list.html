@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Automóveis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="my-4">Automóveis</h1>
+    <a href="/automoveis/new" class="btn btn-primary mb-3">Adicionar Novo Automóvel</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Matrícula</th>
+            <th>Ano</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Placa</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="automovel : ${automoveis}">
+            <td th:text="${automovel.id}"></td>
+            <td th:text="${automovel.matricula}"></td>
+            <td th:text="${automovel.ano}"></td>
+            <td th:text="${automovel.marca}"></td>
+            <td th:text="${automovel.modelo}"></td>
+            <td th:text="${automovel.placa}"></td>
+            <td>
+                <a th:href="@{/automoveis/edit/{id}(id=${automovel.id})}" class="btn btn-sm btn-info">Editar</a>
+                <a th:href="@{/automoveis/delete/{id}(id=${automovel.id})}" class="btn btn-sm btn-danger">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

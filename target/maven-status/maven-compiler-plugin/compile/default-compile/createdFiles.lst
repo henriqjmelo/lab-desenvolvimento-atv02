@@ -1,0 +1,13 @@
+com/example/carrental/service/AutomovelService.class
+com/example/carrental/controller/ClienteController.class
+com/example/carrental/service/PedidoAluguelService.class
+com/example/carrental/repository/AutomovelRepository.class
+com/example/carrental/controller/PedidoAluguelController.class
+com/example/carrental/repository/PedidoAluguelRepository.class
+com/example/carrental/model/Automovel.class
+com/example/carrental/CarrentalApplication.class
+com/example/carrental/controller/AutomovelController.class
+com/example/carrental/model/PedidoAluguel.class
+com/example/carrental/model/Cliente.class
+com/example/carrental/service/ClienteService.class
+com/example/carrental/repository/ClienteRepository.class
