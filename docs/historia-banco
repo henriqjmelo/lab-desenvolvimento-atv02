@@ -9,4 +9,4 @@
 | 05 | Eu, como banco, quero consultar o histórico de pedidos de um cliente para melhorar a análise de crédito.|
 | 06 | Eu, como banco, quero modificar informações do pedido quando necessário para corrigir ou ajustar dados|
 | 07 | Eu, como banco, quero registrar a aprovação do crédito no sistema para liberar a continuidade do contrato|
-| 08 |Eu, como banco, quero acompanhar os contratos ativos para controle financeiro e gestão de risco.|
+| 08 | Eu, como banco, quero acompanhar os contratos ativos para controle financeiro e gestão de risco.|
