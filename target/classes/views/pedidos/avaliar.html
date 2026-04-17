@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Avaliar Pedido - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        h2 { color: #666; font-size: 16px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+        input, select, textarea, button { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        textarea { resize: vertical; min-height: 100px; }
+        button { background-color: #28a745; color: white; cursor: pointer; border: none; }
+        button:hover { background-color: #218838; }
+        .info { background-color: #f0f0f0; padding: 10px; border-radius: 4px; margin-bottom: 20px; }
+        a { color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Avaliar Pedido de Aluguel</h1>
+        
+        [# th:if="${pedido}" ]
+        <div class="info">
+            <h2>Informacoes do Pedido</h2>
+            <p><strong>ID:</strong> [(${pedido.id})]</p>
+            <p><strong>Cliente:</strong> [(${pedido.cliente.nome})]</p>
+            [# th:if="${pedido.automovel}" ]
+            <p><strong>Automovel:</strong> [(${pedido.automovel.marca})] [(${pedido.automovel.modelo})] - [(${pedido.automovel.placa})]</p>
+            [/]
+            <p><strong>Data do Pedido:</strong> [(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')})]</p>
+            [# th:if="${pedido.valorDiaria}" ]
+            <p><strong>Valor da Diaria:</strong> R$ [(${#numbers.formatDecimal(pedido.valorDiaria, 1, 'COMMA', 2, 'POINT')})]</p>
+            [/]
+        </div>
+        
+        <form method="POST" action="/pedidos/avaliar/[(${pedido.id})]">
+            <div class="form-group">
+                <label>Parecer Financeiro:</label>
+                <select name="parecer" required>
+                    <option value="">Selecione...</option>
+                    <option value="APROVADO">Aprovado</option>
+                    <option value="REJEITADO">Rejeitado</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Motivo da Rejeicao (se aplicavel):</label>
+                <textarea name="motivo" placeholder="Explique o motivo da rejeicao, se necessario"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Agente Responsavel:</label>
+                <select name="agenteId" required>
+                    <option value="">Selecione...</option>
+                    [# th:each="agente : ${agentes}" ]
+                    <option value="[(${agente.id})]">[(${agente.nome})] - [(${agente.tipo.descricao})]</option>
+                    [/]
+                </select>
+            </div>
+            <button type="submit">Submeter Avaliacao</button>
+        </form>
+        [/]
+        
+        <div style="margin-top: 20px;">
+            <a href="/pedidos/analise-financeira">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

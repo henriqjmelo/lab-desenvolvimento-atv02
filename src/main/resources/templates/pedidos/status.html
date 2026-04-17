@@ -1,45 +1,60 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Status do Pedido de Aluguel</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Status do Pedido - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 900px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .card { border: 1px solid #ddd; border-radius: 5px; padding: 16px; margin-top: 16px; }
+        .card h2 { margin-top: 0; color: #007bff; font-size: 20px; }
+        p { margin: 8px 0; }
+        .status { display: inline-block; padding: 4px 10px; border-radius: 4px; color: white; background-color: #6c757d; }
+        a { color: #007bff; text-decoration: none; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="my-4">Status do Pedido de Aluguel #<span th:text="${pedido.id}"></span></h1>
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Detalhes do Pedido</h5>
-            <p class="card-text"><strong>Status:</strong> <span th:text="${pedido.status}"></span></p>
-            <p class="card-text"><strong>Data do Pedido:</strong> <span th:text="${#dates.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></span></p>
-            <p class="card-text"><strong>Data de Retirada:</strong> <span th:text="${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')}"></span></p>
-            <p class="card-text"><strong>Data de Devolução:</strong> <span th:text="${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')}"></span></p>
+    <div class="container">
+        <h1>Status do Pedido #[# th:if="${pedido}" ][(${pedido.id})][/]</h1>
+
+        [# th:if="${pedido}" ]
+        <div class="card">
+            <h2>Detalhes do Pedido</h2>
+            <p><strong>Status:</strong> <span class="status">[(${pedido.status})]</span></p>
+            <p><strong>Parecer Financeiro:</strong> [(${pedido.parecer})]</p>
+            <p><strong>Motivo da Rejeicao:</strong> [(${pedido.motivoRejeicao})]</p>
+            <p><strong>Data do Pedido:</strong> [# th:if="${pedido.dataPedido}" ][(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')})][/]</p>
+            <p><strong>Data de Retirada:</strong> [# th:if="${pedido.dataRetirada}" ][(${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')})][/]</p>
+            <p><strong>Data de Devolucao:</strong> [# th:if="${pedido.dataDevolucao}" ][(${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')})][/]</p>
+            <p><strong>Valor da Diaria:</strong> [(${pedido.valorDiaria})]</p>
+        </div>
+
+        [# th:if="${pedido.cliente}" ]
+        <div class="card">
+            <h2>Cliente</h2>
+            <p><strong>Nome:</strong> [(${pedido.cliente.nome})]</p>
+            <p><strong>CPF:</strong> [(${pedido.cliente.cpf})]</p>
+            <p><strong>RG:</strong> [(${pedido.cliente.rg})]</p>
+            <p><strong>Endereco:</strong> [(${pedido.cliente.endereco})]</p>
+            <p><strong>Profissao:</strong> [(${pedido.cliente.profissao})]</p>
+        </div>
+        [/]
+
+        [# th:if="${pedido.automovel}" ]
+        <div class="card">
+            <h2>Automovel</h2>
+            <p><strong>Marca:</strong> [(${pedido.automovel.marca})]</p>
+            <p><strong>Modelo:</strong> [(${pedido.automovel.modelo})]</p>
+            <p><strong>Ano:</strong> [(${pedido.automovel.ano})]</p>
+            <p><strong>Placa:</strong> [(${pedido.automovel.placa})]</p>
+            <p><strong>Matricula:</strong> [(${pedido.automovel.matricula})]</p>
+            <p><strong>Status do Veiculo:</strong> [(${pedido.automovel.statusVeiculo})]</p>
+        </div>
+        [/]
+
+        <div style="margin-top: 20px;">
+            <a href="/pedidos">Voltar</a>
         </div>
     </div>
-
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Informações do Cliente</h5>
-            <p class="card-text"><strong>Nome:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
-            <p class="card-text"><strong>CPF:</strong> <span th:text="${pedido.cliente.cpf}"></span></p>
-            <p class="card-text"><strong>RG:</strong> <span th:text="${pedido.cliente.rg}"></span></p>
-            <p class="card-text"><strong>Endereço:</strong> <span th:text="${pedido.cliente.endereco}"></span></p>
-            <p class="card-text"><strong>Profissão:</strong> <span th:text="${pedido.cliente.profissao}"></span></p>
-        </div>
-    </div>
-
-    <div class="card mt-4">
-        <div class="card-body">
-            <h5 class="card-title">Informações do Automóvel</h5>
-            <p class="card-text"><strong>Marca:</strong> <span th:text="${pedido.automovel.marca}"></span></p>
-            <p class="card-text"><strong>Modelo:</strong> <span th:text="${pedido.automovel.modelo}"></span></p>
-            <p class="card-text"><strong>Ano:</strong> <span th:text="${pedido.automovel.ano}"></span></p>
-            <p class="card-text"><strong>Placa:</strong> <span th:text="${pedido.automovel.placa}"></span></p>
-            <p class="card-text"><strong>Matrícula:</strong> <span th:text="${pedido.automovel.matricula}"></span></p>
-        </div>
-    </div>
-
-    <a href="/pedidos" class="btn btn-secondary mt-4">Voltar para a Lista de Pedidos</a>
-</div>
 </body>
 </html>

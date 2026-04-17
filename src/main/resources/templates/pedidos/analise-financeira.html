@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Analise Financeira - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-avaliar { background-color: #28a745; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .status-pendente { background-color: #ffc107; color: black; padding: 5px 10px; border-radius: 4px; }
+        .status-aprovado { background-color: #28a745; color: white; padding: 5px 10px; border-radius: 4px; }
+        .status-rejeitado { background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 4px; }
+        a { color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analise Financeira de Pedidos</h1>
+        
+        [# th:if="${#lists.isEmpty(pedidos)}" ]
+            <p>Nenhum pedido pendente de analise.</p>
+        [/]
+        
+        [# th:unless="${#lists.isEmpty(pedidos)}" ]
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Automovel</th>
+                    <th>Data do Pedido</th>
+                    <th>Valor Diaria</th>
+                    <th>Parecer</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                [# th:each="pedido : ${pedidos}" ]
+                <tr>
+                    <td>[(${pedido.id})]</td>
+                    <td>[(${pedido.cliente.nome})]</td>
+                    <td>[# th:if="${pedido.automovel}" ][(${pedido.automovel.marca})] [(${pedido.automovel.modelo})] - [(${pedido.automovel.placa})][/][# th:unless="${pedido.automovel}" ]N/A[/]</td>
+                    <td>[(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')})]</td>
+                    <td>[# th:if="${pedido.valorDiaria}" ]R$ [(${#numbers.formatDecimal(pedido.valorDiaria, 1, 'COMMA', 2, 'POINT')})][/][# th:unless="${pedido.valorDiaria}" ]N/A[/]</td>
+                    <td>
+                        [# th:if="${pedido.parecer eq 'PENDENTE'}" ]
+                            <span class="status-pendente">[(${pedido.parecer})]</span>
+                        [/]
+                        [# th:if="${pedido.parecer eq 'APROVADO'}" ]
+                            <span class="status-aprovado">[(${pedido.parecer})]</span>
+                        [/]
+                        [# th:if="${pedido.parecer eq 'REJEITADO'}" ]
+                            <span class="status-rejeitado">[(${pedido.parecer})]</span>
+                        [/]
+                    </td>
+                    <td>
+                        <a href="/pedidos/avaliar/[(${pedido.id})]" class="btn-avaliar">Avaliar</a>
+                    </td>
+                </tr>
+                [/]
+            </tbody>
+        </table>
+        [/]
+        
+        <div style="margin-top: 20px;">
+            <a href="/agentes/dashboard">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

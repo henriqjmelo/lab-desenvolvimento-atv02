@@ -39,7 +39,7 @@ public class AutomovelController {
     @Post("/")
     public HttpResponse<?> addAutomovel(@Body Automovel automovel) {
         automovelService.save(automovel);
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 
     @Get("/edit/{id}")
@@ -53,12 +53,13 @@ public class AutomovelController {
     public HttpResponse<?> updateAutomovel(@PathVariable Long id, @Body Automovel automovel) {
         automovel.setId(id);
         automovelService.save(automovel);
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 
     @Get("/delete/{id}")
     public HttpResponse<?> deleteAutomovel(@PathVariable Long id) {
         automovelService.deleteById(id);
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 }
+

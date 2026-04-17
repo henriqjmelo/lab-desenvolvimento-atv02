@@ -39,7 +39,7 @@ public class ClienteController {
     @Post("/")
     public HttpResponse<?> addCliente(@Body Cliente cliente) {
         clienteService.save(cliente);
-        return HttpResponse.redirect("/clientes");
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 
     @Get("/edit/{id}")
@@ -53,12 +53,13 @@ public class ClienteController {
     public HttpResponse<?> updateCliente(@PathVariable Long id, @Body Cliente cliente) {
         cliente.setId(id);
         clienteService.save(cliente);
-        return HttpResponse.redirect("/clientes");
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 
     @Get("/delete/{id}")
     public HttpResponse<?> deleteCliente(@PathVariable Long id) {
         clienteService.deleteById(id);
-        return HttpResponse.redirect("/clientes");
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 }
+

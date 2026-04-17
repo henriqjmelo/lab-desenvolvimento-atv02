@@ -1,11 +1,12 @@
 package com.example.carrental.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
 import java.util.Date;
 
 @Entity
@@ -14,10 +15,11 @@ public class PedidoAluguel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
+    private String status; // PENDENTE, APROVADO, REJEITADO, CANCELADO
     private Date dataPedido;
     private Date dataRetirada;
     private Date dataDevolucao;
+    private Double valorDiaria;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -26,6 +28,16 @@ public class PedidoAluguel {
     @ManyToOne
     @JoinColumn(name = "automovel_id")
     private Automovel automovel;
+    
+    @ManyToOne
+    @JoinColumn(name = "agente_id")
+    private Agente agenteAnalista; // Agente responsavel pela analise
+    
+    private String parecer; // Analise financeira: APROVADO, REJEITADO, PENDENTE
+    private String motivoRejeicao;
+    
+    @OneToOne(mappedBy = "pedidoAluguel")
+    private ContratoCredito contratoCredito;
 
     public PedidoAluguel() {
     }
@@ -37,6 +49,7 @@ public class PedidoAluguel {
         this.dataDevolucao = dataDevolucao;
         this.cliente = cliente;
         this.automovel = automovel;
+        this.parecer = "PENDENTE";
     }
 
     // Getters e Setters
@@ -95,4 +108,46 @@ public class PedidoAluguel {
     public void setAutomovel(Automovel automovel) {
         this.automovel = automovel;
     }
+    
+    public Double getValorDiaria() {
+        return valorDiaria;
+    }
+
+    public void setValorDiaria(Double valorDiaria) {
+        this.valorDiaria = valorDiaria;
+    }
+
+    public Agente getAgenteAnalista() {
+        return agenteAnalista;
+    }
+
+    public void setAgenteAnalista(Agente agenteAnalista) {
+        this.agenteAnalista = agenteAnalista;
+    }
+
+    public String getParecer() {
+        return parecer;
+    }
+
+    public void setParecer(String parecer) {
+        this.parecer = parecer;
+    }
+
+    public String getMotivoRejeicao() {
+        return motivoRejeicao;
+    }
+
+    public void setMotivoRejeicao(String motivoRejeicao) {
+        this.motivoRejeicao = motivoRejeicao;
+    }
+
+    public ContratoCredito getContratoCredito() {
+        return contratoCredito;
+    }
+
+    public void setContratoCredito(ContratoCredito contratoCredito) {
+        this.contratoCredito = contratoCredito;
+    }
 }
+
+

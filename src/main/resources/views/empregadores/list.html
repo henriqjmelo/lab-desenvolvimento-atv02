@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Empregadores - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 900px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        h2 { color: #666; font-size: 16px; }
+        .btn-novo { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-edit { background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; }
+        a { color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Empregadores do Cliente</h1>
+        <h2 th:if="${cliente != null}">Cliente: <span th:text="${cliente.nome}"></span></h2>
+        
+        <a th:href="@{/empregadores/new/{clienteId}(clienteId=${clienteId})}" class="btn-novo">+ Novo Empregador</a>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Empresa</th>
+                    <th>Cargo</th>
+                    <th>Rendimento</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="emp : ${empregadores}">
+                    <td th:text="${emp.id}"></td>
+                    <td th:text="${emp.nomeEmpresa}"></td>
+                    <td th:text="${emp.cargo}"></td>
+                    <td th:text="${'R$ ' + #numbers.formatDecimal(emp.rendimento, 1, 'COMMA', 2, 'POINT')}"></td>
+                    <td>
+                        <a th:href="@{/empregadores/edit/{id}(id=${emp.id})}" class="btn-edit">Editar</a>
+                        <form method="POST" th:action="@{/empregadores/delete/{id}(id=${emp.id})}" style="display: inline;">
+                            <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza?')">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px;">
+            <a th:href="@{/clientes/edit/{id}(id=${clienteId})}">Voltar para Cliente</a>
+        </div>
+    </div>
+</body>
+</html>

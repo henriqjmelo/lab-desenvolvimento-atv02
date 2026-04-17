@@ -32,3 +32,4 @@ public class AutomovelService {
         automovelRepository.deleteById(id);
     }
 }
+

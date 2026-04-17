@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adicionar/Editar Empregador - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        h2 { color: #666; font-size: 16px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+        input, button { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; cursor: pointer; border: none; }
+        button:hover { background-color: #218838; }
+        a { color: #007bff; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 th:if="${empregador.id != null}">Editar Empregador</h1>
+        <h1 th:unless="${empregador.id != null}">Novo Empregador</h1>
+        <h2 th:if="${cliente != null}">Cliente: <span th:text="${cliente.nome}"></span></h2>
+
+        <form method="POST" th:if="${empregador.id == null}" action="/empregadores/">
+            <input type="hidden" name="cliente.id" th:value="${clienteId}">
+            
+            <div class="form-group">
+                <label>Nome da Empresa:</label>
+                <input type="text" name="nomeEmpresa" th:value="${empregador.nomeEmpresa}" required>
+            </div>
+            <div class="form-group">
+                <label>Cargo:</label>
+                <input type="text" name="cargo" th:value="${empregador.cargo}" required>
+            </div>
+            <div class="form-group">
+                <label>Rendimento (R$):</label>
+                <input type="number" name="rendimento" step="0.01" th:value="${empregador.rendimento}" required>
+            </div>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <form method="POST" th:if="${empregador.id != null}" th:action="@{/empregadores/edit/{id}(id=${empregador.id})}">
+            <input type="hidden" name="cliente.id" th:value="${clienteId}">
+
+            <div class="form-group">
+                <label>Nome da Empresa:</label>
+                <input type="text" name="nomeEmpresa" th:value="${empregador.nomeEmpresa}" required>
+            </div>
+            <div class="form-group">
+                <label>Cargo:</label>
+                <input type="text" name="cargo" th:value="${empregador.cargo}" required>
+            </div>
+            <div class="form-group">
+                <label>Rendimento (R$):</label>
+                <input type="number" name="rendimento" step="0.01" th:value="${empregador.rendimento}" required>
+            </div>
+            <button type="submit">Atualizar</button>
+        </form>
+        
+        <div style="margin-top: 20px;">
+            <a th:href="@{/empregadores/cliente/{clienteId}(clienteId=${clienteId})}">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

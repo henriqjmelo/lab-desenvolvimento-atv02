@@ -1,9 +1,14 @@
 package com.example.carrental.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -16,8 +21,13 @@ public class Cliente {
     private String nome;
     private String endereco;
     private String profissao;
-    // private List<String> entidadesEmpregadoras; // Para simplificar, não será implementado como List<String> diretamente no JPA
-    // private List<Double> rendimentosAuferidos; // Para simplificar, não será implementado como List<Double> diretamente no JPA
+    
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+    
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Empregador> empregadores;
 
     public Cliente() {
     }
@@ -78,4 +88,21 @@ public class Cliente {
     public void setProfissao(String profissao) {
         this.profissao = profissao;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public List<Empregador> getEmpregadores() {
+        return empregadores;
+    }
+
+    public void setEmpregadores(List<Empregador> empregadores) {
+        this.empregadores = empregadores;
+    }
 }
+

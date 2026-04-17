@@ -7,70 +7,70 @@
   <img src="https://img.shields.io/badge/Status-Sprint%2001-yellow" alt="Sprint 01">
 </p>
 
-## 📖 Descrição do Projeto
+## Descricao do Projeto
 
-Este repositório contém o desenvolvimento do **Sistema de Aluguel de Carros**, um projeto prático da disciplina *Laboratório de Desenvolvimento de Software* (LAB02) do curso de **Engenharia de Software**.
+Este repositorio contem o desenvolvimento do **Sistema de Aluguel de Carros**, um projeto pratico da disciplina *Laboratorio de Desenvolvimento de Software* (LAB02) do curso de **Engenharia de Software**.
 
-O objetivo é criar uma plataforma web que permita a gestão completa de aluguéis de automóveis. O sistema atende a diferentes perfis de usuários (Clientes, Empresas e Bancos), permitindo desde o cadastro e solicitação de aluguel até a análise financeira e formalização de contratos de crédito.
+O objetivo e criar uma plataforma web que permita a gestao completa de alugueis de automoveis. O sistema atende a diferentes perfis de usuarios (Clientes, Empresas e Bancos), permitindo desde o cadastro e solicitacao de aluguel ate a analise financeira e formalizacao de contratos de credito.
 
-O projeto é desenvolvido em **Java**, utilizando a arquitetura **MVC** e seguindo um cronograma de desenvolvimento ágil dividido em 3 Sprints.
-
----
-
-## 🗂️ Estrutura do Repositório (Sprint 01)
-
-Atualmente, o projeto encontra-se na fase de modelagem. Os artefatos disponíveis são:
-
-- **Diagrama de Casos de Uso**: Representação das interações entre os atores (Clientes e Agentes) e o sistema.
-- **Histórias de Usuário**: Detalhamento das funcionalidades sob a ótica do usuário final.
-- **Diagrama de Classes**: Modelagem estrutural das entidades (Clientes, Automóveis, Agentes, Contratos).
-- **Diagrama de Pacotes**: Visão lógica da organização do sistema (Visão Lógica/Arquitetural).
+O projeto e desenvolvido em **Java**, utilizando a arquitetura **MVC** e seguindo um cronograma de desenvolvimento agil dividido em 3 Sprints.
 
 ---
 
-## ✨ Funcionalidades Planejadas
+## Estrutura do Repositorio (Sprint 01)
 
-- **Cadastro de Usuários**: Registro obrigatório para utilização do sistema.
-- **Gestão de Pedidos**: Clientes podem introduzir, modificar, consultar e cancelar pedidos de aluguel.
-- **Análise Financeira**: Agentes (Bancos e Empresas) podem avaliar e modificar pedidos de aluguel.
-- **Gestão de Contratos**: Formalização de contratos de aluguel e crédito, com registro de propriedade dos veículos.
-- **Multiperfil**: Diferenciação entre usuários individuais (clientes) e agentes corporativos.
+Atualmente, o projeto encontra-se na fase de modelagem. Os artefatos disponiveis sao:
+
+- **Diagrama de Casos de Uso**: Representacao das interacoes entre os atores (Clientes e Agentes) e o sistema.
+- **Historias de Usuario**: Detalhamento das funcionalidades sob a otica do usuario final.
+- **Diagrama de Classes**: Modelagem estrutural das entidades (Clientes, Automoveis, Agentes, Contratos).
+- **Diagrama de Pacotes**: Visao logica da organizacao do sistema (Visao Logica/Arquitetural).
 
 ---
 
-## 🛠️ Regras de Negócio e Dados
+## Funcionalidades Planejadas
+
+- **Cadastro de Usuarios**: Registro obrigatorio para utilizacao do sistema.
+- **Gestao de Pedidos**: Clientes podem introduzir, modificar, consultar e cancelar pedidos de aluguel.
+- **Analise Financeira**: Agentes (Bancos e Empresas) podem avaliar e modificar pedidos de aluguel.
+- **Gestao de Contratos**: Formalizacao de contratos de aluguel e credito, com registro de propriedade dos veiculos.
+- **Multiperfil**: Diferenciacao entre usuarios individuais (clientes) e agentes corporativos.
+
+---
+
+## Regras de Negocio e Dados
 
 | Entidade | Dados Armazenados |
 | :--- | :--- |
-| **Contratantes** | RG, CPF, Nome, Endereço, Profissão, Entidades Empregadoras, Rendimentos (até 3). |
-| **Automóveis** | Matrícula, Ano, Marca, Modelo, Placa. |
-| **Agentes** | Empresas e Bancos responsáveis pela avaliação e concessão de crédito. |
+| **Contratantes** | RG, CPF, Nome, Endereco, Profissao, Entidades Empregadoras, Rendimentos (ate 3). |
+| **Automoveis** | Matricula, Ano, Marca, Modelo, Placa. |
+| **Agentes** | Empresas e Bancos responsaveis pela avaliacao e concessao de credito. |
 
 ---
 
-## 📈 Processo de Desenvolvimento (Sprints)
+## Processo de Desenvolvimento (Sprints)
 
-O desenvolvimento segue o roteiro estabelecido para o Laboratório 02:
+O desenvolvimento segue o roteiro estabelecido para o Laboratorio 02:
 
 | Sprint | Atividades | Status |
 | :--- | :--- | :---: |
-| **Lab02S01** | Modelagem (Casos de Uso, Histórias, Classes, Pacotes). | 🟢 Concluído |
-| **Lab02S02** | Revisão, Diagrama de Componentes e CRUD de Cliente (Java/Web). | 🟡 Pendente |
-| **Lab02S03** | Diagrama de Implantação e Protótipo Final (Gestão de Aluguel). | ⚪ Pendente |
+| **Lab02S01** | Modelagem (Casos de Uso, Historias, Classes, Pacotes). | Concluido |
+| **Lab02S02** | Revisao, Diagrama de Componentes e CRUD de Cliente (Java/Web). | Pendente |
+| **Lab02S03** | Diagrama de Implantacao e Prototipo Final (Gestao de Aluguel). | Pendente |
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **Linguagem:** Java 17+
 - **Arquitetura:** MVC (Model-View-Controller)
 - **Framework:** Spring Boot / Micronaut
-- **Persistência:** JPA / Hibernate
+- **Persistencia:** JPA / Hibernate
 - **Modelagem:** UML (Diagramas de Casos de Uso, Classes, Componentes)
 
 ---
 
-## 👥 Autores
+## Autores
 
 - **Gabriel Afonso Infante Vieira**
 - **Camila** 
@@ -78,5 +78,5 @@ O desenvolvimento segue o roteiro estabelecido para o Laboratório 02:
 
 ---
 
-**Professor:** João Paulo Carneiro Aramuni  
-**Instituição:** PUC Minas
+**Professor:** Joao Paulo Carneiro Aramuni  
+**Instituicao:** PUC Minas

@@ -1,5 +1,5 @@
 // =====================================
-// SUBSISTEMA 1: GESTÃO DE PEDIDOS E CONTRATOS
+// SUBSISTEMA 1: GESTAO DE PEDIDOS E CONTRATOS
 // =====================================
 
 let clienteCadastrado = null;
@@ -8,7 +8,7 @@ let pedidos = [];
 let contadorPedidos = 1;
 let pedidoEmEdicao = null;
 
-// Formulários
+// Formularios
 const formLogin = document.getElementById("formLogin");
 const formCadastro = document.getElementById("formCadastro");
 const formPedido = document.getElementById("formPedido");
@@ -20,7 +20,7 @@ const mensagemCadastro = document.getElementById("mensagemCadastro");
 const mensagemPedido = document.getElementById("mensagemPedido");
 const mensagemAgente = document.getElementById("mensagemAgente");
 
-// Áreas dinâmicas
+// Areas dinamicas
 const listaPedidos = document.getElementById("listaPedidos");
 const pedidoSelecionado = document.getElementById("pedidoSelecionado");
 
@@ -52,7 +52,7 @@ formCadastro.addEventListener("submit", function (e) {
 
   clienteLogado = null;
   mensagemCadastro.style.color = "#34d399";
-  mensagemCadastro.textContent = `Cliente ${clienteCadastrado.nome} cadastrado com sucesso. Agora faça o login.`;
+  mensagemCadastro.textContent = `Cliente ${clienteCadastrado.nome} cadastrado com sucesso. Agora faca o login.`;
   formCadastro.reset();
 });
 
@@ -65,7 +65,7 @@ formLogin.addEventListener("submit", function (e) {
 
   if (!clienteCadastrado) {
     mensagemLogin.style.color = "#f87171";
-    mensagemLogin.textContent = "Nenhum cliente cadastrado. Faça o cadastro primeiro.";
+    mensagemLogin.textContent = "Nenhum cliente cadastrado. Faca o cadastro primeiro.";
     return;
   }
 
@@ -79,7 +79,7 @@ formLogin.addEventListener("submit", function (e) {
     formLogin.reset();
   } else {
     mensagemLogin.style.color = "#f87171";
-    mensagemLogin.textContent = "Dados de login inválidos.";
+    mensagemLogin.textContent = "Dados de login invalidos.";
   }
 });
 
@@ -89,7 +89,7 @@ formPedido.addEventListener("submit", function (e) {
 
   if (!clienteLogado) {
     mensagemPedido.style.color = "#f87171";
-    mensagemPedido.textContent = "É necessário fazer login para registrar um pedido.";
+    mensagemPedido.textContent = "E necessario fazer login para registrar um pedido.";
     return;
   }
 
@@ -98,7 +98,7 @@ formPedido.addEventListener("submit", function (e) {
 
   if (temCredito === "Sim" && bancoAgente === "") {
     mensagemPedido.style.color = "#f87171";
-    mensagemPedido.textContent = "Informe o banco agente quando houver contrato de crédito.";
+    mensagemPedido.textContent = "Informe o banco agente quando houver contrato de credito.";
     return;
   }
 
@@ -111,8 +111,8 @@ formPedido.addEventListener("submit", function (e) {
     placa: document.getElementById("placa").value.trim(),
     tipoProprietario: document.getElementById("tipoProprietario").value,
     temCredito: temCredito,
-    bancoAgente: bancoAgente || "Não se aplica",
-    status: "Em análise financeira",
+    bancoAgente: bancoAgente || "Nao se aplica",
+    status: "Em analise financeira",
     observacao: "Pedido criado pelo cliente"
   };
 
@@ -149,7 +149,7 @@ formPedido.addEventListener("submit", function (e) {
   atualizarPedidos();
 });
 
-// Atualização por agentes
+// Atualizacao por agentes
 formAgente.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -161,7 +161,7 @@ formAgente.addEventListener("submit", function (e) {
 
   if (!pedido) {
     mensagemAgente.style.color = "#f87171";
-    mensagemAgente.textContent = "Pedido não encontrado.";
+    mensagemAgente.textContent = "Pedido nao encontrado.";
     return;
   }
 
@@ -181,7 +181,7 @@ formAgente.addEventListener("submit", function (e) {
 });
 
 // =====================================
-// SUBSISTEMA 2: CONSTRUÇÃO DINÂMICA DAS PÁGINAS WEB
+// SUBSISTEMA 2: CONSTRUCAO DINAMICA DAS PAGINAS WEB
 // =====================================
 
 function atualizarPedidos() {
@@ -204,15 +204,15 @@ function renderizarPedidos() {
     card.innerHTML = `
       <h3>Pedido #${pedido.id}</h3>
       <p><strong>Cliente:</strong> ${pedido.cliente}</p>
-      <p><strong>Automóvel:</strong> ${pedido.marca} ${pedido.modelo}</p>
-      <p><strong>Matrícula:</strong> ${pedido.matricula}</p>
+      <p><strong>Automovel:</strong> ${pedido.marca} ${pedido.modelo}</p>
+      <p><strong>Matricula:</strong> ${pedido.matricula}</p>
       <p><strong>Placa:</strong> ${pedido.placa}</p>
       <p><strong>Ano:</strong> ${pedido.ano}</p>
-      <p><strong>Proprietário:</strong> ${pedido.tipoProprietario}</p>
-      <p><strong>Contrato de crédito:</strong> ${pedido.temCredito}</p>
+      <p><strong>Proprietario:</strong> ${pedido.tipoProprietario}</p>
+      <p><strong>Contrato de credito:</strong> ${pedido.temCredito}</p>
       <p><strong>Banco agente:</strong> ${pedido.bancoAgente}</p>
       <p><strong>Status:</strong> ${pedido.status}</p>
-      <p><strong>Observação:</strong> ${pedido.observacao}</p>
+      <p><strong>Observacao:</strong> ${pedido.observacao}</p>
       <div class="acoes">
         <button class="btn-editar" onclick="editarPedido(${pedido.id})">Modificar</button>
         <button class="btn-cancelar" onclick="cancelarPedido(${pedido.id})">Cancelar</button>
@@ -249,11 +249,11 @@ function editarPedido(id) {
   document.getElementById("tipoProprietario").value = pedido.tipoProprietario;
   document.getElementById("temCredito").value = pedido.temCredito;
   document.getElementById("bancoAgente").value =
-    pedido.bancoAgente === "Não se aplica" ? "" : pedido.bancoAgente;
+    pedido.bancoAgente === "Nao se aplica" ? "" : pedido.bancoAgente;
 
   pedidoEmEdicao = id;
   mensagemPedido.style.color = "#fbbf24";
-  mensagemPedido.textContent = `Editando o pedido #${id}. Faça as alterações e clique em "Registrar Pedido".`;
+  mensagemPedido.textContent = `Editando o pedido #${id}. Faca as alteracoes e clique em "Registrar Pedido".`;
 }
 
 function cancelarPedido(id) {

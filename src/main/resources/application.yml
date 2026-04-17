@@ -1,9 +1,13 @@
 micronaut:
   application:
     name: carrental
+  server:
+    default-charset: UTF-8
   views:
     thymeleaf:
       enabled: true
+      prefix: classpath:templates/
+      suffix: .html
 
 datasources:
   default:

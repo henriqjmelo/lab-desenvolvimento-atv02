@@ -1,1 +1,1 @@
-Neste diretório ficam os diagramas.
+Neste diretorio ficam os diagramas.

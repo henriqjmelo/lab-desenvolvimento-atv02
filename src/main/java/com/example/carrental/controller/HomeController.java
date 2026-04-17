@@ -9,7 +9,8 @@ public class HomeController {
 
     @Get("/")
     public HttpResponse<?> home() {
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 
 }
+
