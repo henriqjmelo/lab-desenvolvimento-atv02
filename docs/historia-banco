@@ -1,10 +1,40 @@
-Histórias de Usuários Sistema de Aluguel de Carros
-ID	História
-01	Eu, como banco, quero acessar o sistema para visualizar os pedidos de aluguel com solicitação de crédito.
-02	Eu, como banco, quero analisar os dados financeiros do cliente (renda, emprego, etc.) para avaliar o risco do pedido.
-03	Eu, como banco, quero aprovar ou reprovar pedidos de crédito para garantir segurança financeira.
-04	Eu, como banco, quero associar um contrato de crédito ao pedido aprovado para formalizar o financiamento.
-05	Eu, como banco, quero consultar o histórico de pedidos de um cliente para melhorar a análise de crédito.
-06	Eu, como banco, quero modificar informações do pedido quando necessário para corrigir ou ajustar dados.
-07	Eu, como banco, quero registrar a aprovação do crédito no sistema para liberar a continuidade do contrato.
-08	Eu, como banco, quero acompanhar os contratos ativos para controle financeiro e gestão de risco.
+<h1>Histórias de Usuários Sistema de Aluguel de Carros - Banco</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>História</th>
+    </tr>
+    <tr>
+        <td>01</td>
+        <td>Eu, como banco, quero acessar o sistema para visualizar os pedidos de aluguel com solicitação de crédito</td>
+    </tr>
+    <tr>
+        <td>02</td>
+        <td>Eu, como banco, quero analisar os dados financeiros do cliente (renda, emprego, etc.) para avaliar o risco do pedido</td>
+    </tr>
+    <tr>
+        <td>03</td>
+        <td>Eu, como banco, quero aprovar ou reprovar pedidos de crédito para garantir segurança financeira</td>
+    </tr>
+    <tr>
+        <td>04</td>
+        <td>Eu, como banco, quero associar um contrato de crédito ao pedido aprovado para formalizar o financiamento</td>
+    </tr>
+    <tr>
+        <td>05</td>
+        <td>Eu, como banco, quero consultar o histórico de pedidos de um cliente para melhorar a análise de crédito</td>
+    </tr>
+    <tr>
+        <td>06</td>
+        <td>Eu, como banco, quero modificar informações do pedido quando necessário para corrigir ou ajustar dados</td>
+    </tr>
+    <tr>
+        <td>07</td>
+        <td>Eu, como banco, quero registrar a aprovação do crédito no sistema para liberar a continuidade do contrato</td>
+    </tr>
+    <tr>
+        <td>08</td>
+        <td>Eu, como banco, quero acompanhar os contratos ativos para controle financeiro e gestão de risco</td>
+    </tr>
+</table>
