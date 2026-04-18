@@ -21,11 +21,11 @@
     <div class="container">
         <h1>Analise Financeira de Pedidos</h1>
         
-        [# th:if="${#lists.isEmpty(pedidos)}" ]
+        <div th:if="${#lists.isEmpty(pedidos)}">
             <p>Nenhum pedido pendente de analise.</p>
-        [/]
+        </div>
         
-        [# th:unless="${#lists.isEmpty(pedidos)}" ]
+        <div th:unless="${#lists.isEmpty(pedidos)}">
         <table>
             <thead>
                 <tr>
@@ -39,32 +39,24 @@
                 </tr>
             </thead>
             <tbody>
-                [# th:each="pedido : ${pedidos}" ]
-                <tr>
-                    <td>[(${pedido.id})]</td>
-                    <td>[(${pedido.cliente.nome})]</td>
-                    <td>[# th:if="${pedido.automovel}" ][(${pedido.automovel.marca})] [(${pedido.automovel.modelo})] - [(${pedido.automovel.placa})][/][# th:unless="${pedido.automovel}" ]N/A[/]</td>
-                    <td>[(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')})]</td>
-                    <td>[# th:if="${pedido.valorDiaria}" ]R$ [(${#numbers.formatDecimal(pedido.valorDiaria, 1, 'COMMA', 2, 'POINT')})][/][# th:unless="${pedido.valorDiaria}" ]N/A[/]</td>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id}"></td>
+                    <td th:text="${pedido.cliente != null ? pedido.cliente.nome : ''}"></td>
+                    <td th:text="${pedido.automovel != null ? (pedido.automovel.marca + ' ' + pedido.automovel.modelo + ' - ' + pedido.automovel.placa) : 'N/A'}"></td>
+                    <td th:text="${pedido.dataPedido != null ? #dates.format(pedido.dataPedido, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.valorDiaria != null ? ('R$ ' + #numbers.formatDecimal(pedido.valorDiaria, 1, 'COMMA', 2, 'POINT')) : 'N/A'}"></td>
                     <td>
-                        [# th:if="${pedido.parecer eq 'PENDENTE'}" ]
-                            <span class="status-pendente">[(${pedido.parecer})]</span>
-                        [/]
-                        [# th:if="${pedido.parecer eq 'APROVADO'}" ]
-                            <span class="status-aprovado">[(${pedido.parecer})]</span>
-                        [/]
-                        [# th:if="${pedido.parecer eq 'REJEITADO'}" ]
-                            <span class="status-rejeitado">[(${pedido.parecer})]</span>
-                        [/]
+                        <span th:if="${pedido.parecer eq 'PENDENTE'}" class="status-pendente" th:text="${pedido.parecer}"></span>
+                        <span th:if="${pedido.parecer eq 'APROVADO'}" class="status-aprovado" th:text="${pedido.parecer}"></span>
+                        <span th:if="${pedido.parecer eq 'REJEITADO'}" class="status-rejeitado" th:text="${pedido.parecer}"></span>
                     </td>
                     <td>
-                        <a href="/pedidos/avaliar/[(${pedido.id})]" class="btn-avaliar">Avaliar</a>
+                        <a th:href="@{/pedidos/avaliar/{id}(id=${pedido.id})}" class="btn-avaliar">Avaliar</a>
                     </td>
                 </tr>
-                [/]
             </tbody>
         </table>
-        [/]
+        </div>
         
         <div style="margin-top: 20px;">
             <a href="/agentes/dashboard">Voltar</a>

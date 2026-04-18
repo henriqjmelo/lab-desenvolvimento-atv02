@@ -4,6 +4,7 @@ import com.example.carrental.model.Agente;
 import com.example.carrental.model.TipoAgente;
 import com.example.carrental.service.AgenteService;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.views.ModelAndView;
 
@@ -45,7 +46,7 @@ public class AgenteController {
         return new ModelAndView<>("agentes/add-edit", model);
     }
 
-    @Post("/")
+    @Post(value = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> addAgente(@Body Agente agente) {
         agenteService.save(agente);
         return HttpResponse.redirect(java.net.URI.create("/agentes"));
@@ -61,14 +62,14 @@ public class AgenteController {
         return new ModelAndView<>("agentes/add-edit", model);
     }
 
-    @Post("/edit/{id}")
+    @Post(value = "/edit/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> updateAgente(@PathVariable Long id, @Body Agente agente) {
         agente.setId(id);
-        agenteService.save(agente);
+        agenteService.update(agente);
         return HttpResponse.redirect(java.net.URI.create("/agentes"));
     }
 
-    @Post("/delete/{id}")
+    @Post(value = "/delete/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> deleteAgente(@PathVariable Long id) {
         agenteService.deleteById(id);
         return HttpResponse.redirect(java.net.URI.create("/agentes"));

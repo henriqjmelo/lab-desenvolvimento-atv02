@@ -4,11 +4,13 @@ import com.example.carrental.model.Empregador;
 import com.example.carrental.service.EmpregadorService;
 import com.example.carrental.service.ClienteService;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.views.ModelAndView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller("/empregadores")
 public class EmpregadorController {
@@ -39,8 +41,13 @@ public class EmpregadorController {
         return new ModelAndView<>("empregadores/add-edit", model);
     }
 
-    @Post("/")
-    public HttpResponse<?> addEmpregador(@Body Empregador empregador) {
+    @Post(value = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public HttpResponse<?> addEmpregador(@Body Map<String, String> form) {
+        Empregador empregador = new Empregador();
+        preencherEmpregadorComForm(empregador, form);
+        if (empregador.getCliente() == null) {
+            return HttpResponse.badRequest();
+        }
         empregadorService.save(empregador);
         Long clienteId = empregador.getCliente().getId();
         return HttpResponse.redirect(java.net.URI.create("/empregadores/cliente/" + clienteId));
@@ -57,15 +64,21 @@ public class EmpregadorController {
         return new ModelAndView<>("empregadores/add-edit", model);
     }
 
-    @Post("/edit/{id}")
-    public HttpResponse<?> updateEmpregador(@PathVariable Long id, @Body Empregador empregador) {
+    @Post(value = "/edit/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public HttpResponse<?> updateEmpregador(@PathVariable Long id, @Body Map<String, String> form) {
+        Optional<Empregador> existente = empregadorService.findById(id);
+        Empregador empregador = existente.orElse(new Empregador());
         empregador.setId(id);
-        empregadorService.save(empregador);
+        preencherEmpregadorComForm(empregador, form);
+        if (empregador.getCliente() == null) {
+            return HttpResponse.badRequest();
+        }
+        empregadorService.update(empregador);
         Long clienteId = empregador.getCliente().getId();
         return HttpResponse.redirect(java.net.URI.create("/empregadores/cliente/" + clienteId));
     }
 
-    @Post("/delete/{id}")
+    @Post(value = "/delete/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> deleteEmpregador(@PathVariable Long id) {
         return empregadorService.findById(id)
             .map(empregador -> {
@@ -74,6 +87,29 @@ public class EmpregadorController {
                 return HttpResponse.redirect(java.net.URI.create("/empregadores/cliente/" + clienteId));
             })
             .orElse(HttpResponse.badRequest());
+    }
+
+    private void preencherEmpregadorComForm(Empregador empregador, Map<String, String> form) {
+        empregador.setNomeEmpresa(form.getOrDefault("nomeEmpresa", ""));
+        empregador.setCargo(form.getOrDefault("cargo", ""));
+
+        String rendimento = form.getOrDefault("rendimento", "").trim();
+        if (!rendimento.isEmpty()) {
+            try {
+                empregador.setRendimento(Double.parseDouble(rendimento));
+            } catch (NumberFormatException ignored) {
+                empregador.setRendimento(null);
+            }
+        }
+
+        String clienteId = form.getOrDefault("cliente.id", "").trim();
+        if (!clienteId.isEmpty()) {
+            try {
+                clienteService.findById(Long.parseLong(clienteId)).ifPresent(empregador::setCliente);
+            } catch (NumberFormatException ignored) {
+                // Ignora ID de cliente invalido enviado no formulario.
+            }
+        }
     }
 }
 

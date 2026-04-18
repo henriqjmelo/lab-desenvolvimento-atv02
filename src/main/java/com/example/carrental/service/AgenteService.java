@@ -23,6 +23,10 @@ public class AgenteService {
         agenteRepository.save(agente);
     }
 
+    public void update(Agente agente) {
+        agenteRepository.update(agente);
+    }
+
     public Optional<Agente> findById(Long id) {
         return agenteRepository.findById(id);
     }

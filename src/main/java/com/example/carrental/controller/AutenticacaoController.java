@@ -4,6 +4,7 @@ import com.example.carrental.model.Usuario;
 import com.example.carrental.model.TipoUsuario;
 import com.example.carrental.service.UsuarioService;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.views.ModelAndView;
 import io.micronaut.http.cookie.Cookie;
@@ -34,8 +35,10 @@ public class AutenticacaoController {
         return new ModelAndView<>("auth/login", model);
     }
 
-    @Post("/login")
-    public HttpResponse<?> login(@QueryValue String email, @QueryValue String senha) {
+    @Post(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public HttpResponse<?> login(@Body Usuario loginForm) {
+        String email = loginForm.getEmail();
+        String senha = loginForm.getSenha();
         Optional<Usuario> usuario = usuarioService.findByEmailAndSenha(email, senha);
         
         if (usuario.isPresent()) {
@@ -63,7 +66,7 @@ public class AutenticacaoController {
         return new ModelAndView<>("auth/cadastro", model);
     }
 
-    @Post("/cadastro")
+    @Post(value = "/cadastro", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> cadastro(@Body Usuario usuario) {
         // Verificar se email ja existe
         if (usuarioService.findByEmail(usuario.getEmail()).isPresent()) {

@@ -26,15 +26,13 @@
                 </tr>
             </thead>
             <tbody>
-                [# th:each="agente : ${agentes}" ]
-                <tr>
-                    <td>[(${agente.id})]</td>
-                    <td>[(${agente.nome})]</td>
-                    <td>[(${agente.cnpj})]</td>
-                    <td>[(${agente.endereco})]</td>
-                    <td>[(${agente.telefone})]</td>
+                <tr th:each="agente : ${agentes}">
+                    <td th:text="${agente.id}"></td>
+                    <td th:text="${agente.nome}"></td>
+                    <td th:text="${agente.cnpj}"></td>
+                    <td th:text="${agente.endereco}"></td>
+                    <td th:text="${agente.telefone}"></td>
                 </tr>
-                [/]
             </tbody>
         </table>
         <div style="margin-top: 20px;">

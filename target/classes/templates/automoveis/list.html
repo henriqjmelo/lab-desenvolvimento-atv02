@@ -36,23 +36,21 @@
                 </tr>
             </thead>
             <tbody>
-                [# th:each="automovel : ${automoveis}" ]
-                <tr>
-                    <td>[(${automovel.id})]</td>
-                    <td>[(${automovel.matricula})]</td>
-                    <td>[(${automovel.ano})]</td>
-                    <td>[(${automovel.marca})]</td>
-                    <td>[(${automovel.modelo})]</td>
-                    <td>[(${automovel.placa})]</td>
-                    <td>[(${automovel.tipoPropriedade})]</td>
-                    <td>[(${automovel.nomeProprietario})]</td>
-                    <td>[(${automovel.statusVeiculo})]</td>
+                <tr th:each="automovel : ${automoveis}">
+                    <td th:text="${automovel.id}"></td>
+                    <td th:text="${automovel.matricula}"></td>
+                    <td th:text="${automovel.ano}"></td>
+                    <td th:text="${automovel.marca}"></td>
+                    <td th:text="${automovel.modelo}"></td>
+                    <td th:text="${automovel.placa}"></td>
+                    <td th:text="${automovel.tipoPropriedade}"></td>
+                    <td th:text="${automovel.nomeProprietario}"></td>
+                    <td th:text="${automovel.statusVeiculo}"></td>
                     <td>
-                        <a href="/automoveis/edit/[(${automovel.id})]" class="btn-edit">Editar</a>
-                        <a href="/automoveis/delete/[(${automovel.id})]" class="btn-delete">Excluir</a>
+                        <a th:href="@{/automoveis/edit/{id}(id=${automovel.id})}" class="btn-edit">Editar</a>
+                        <a th:href="@{/automoveis/delete/{id}(id=${automovel.id})}" class="btn-delete">Excluir</a>
                     </td>
                 </tr>
-                [/]
             </tbody>
         </table>
     </div>

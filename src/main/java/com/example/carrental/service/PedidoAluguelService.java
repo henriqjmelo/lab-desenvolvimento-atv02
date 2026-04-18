@@ -28,6 +28,10 @@ public class PedidoAluguelService {
         return pedidoAluguelRepository.save(pedidoAluguel);
     }
 
+    public PedidoAluguel update(PedidoAluguel pedidoAluguel) {
+        return pedidoAluguelRepository.update(pedidoAluguel);
+    }
+
     public void deleteById(Long id) {
         pedidoAluguelRepository.deleteById(id);
     }

@@ -22,6 +22,10 @@ public class EmpregadorService {
         empregadorRepository.save(empregador);
     }
 
+    public void update(Empregador empregador) {
+        empregadorRepository.update(empregador);
+    }
+
     public Optional<Empregador> findById(Long id) {
         return empregadorRepository.findById(id);
     }

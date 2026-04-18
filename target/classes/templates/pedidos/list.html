@@ -42,23 +42,21 @@
                 </tr>
             </thead>
             <tbody>
-                [# th:each="pedido : ${pedidos}" ]
-                <tr>
-                    <td>[(${pedido.id})]</td>
-                    <td>[(${pedido.status})]</td>
-                    <td>[(${pedido.parecer})]</td>
-                    <td>[# th:if="${pedido.dataPedido}" ][(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')})][/]</td>
-                    <td>[# th:if="${pedido.dataRetirada}" ][(${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')})][/]</td>
-                    <td>[# th:if="${pedido.dataDevolucao}" ][(${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')})][/]</td>
-                    <td>[# th:if="${pedido.cliente}" ][(${pedido.cliente.nome})][/]</td>
-                    <td>[# th:if="${pedido.automovel}" ][(${pedido.automovel.marca})] [(${pedido.automovel.modelo})][/]</td>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id}"></td>
+                    <td th:text="${pedido.status}"></td>
+                    <td th:text="${pedido.parecer}"></td>
+                    <td th:text="${pedido.dataPedido != null ? #dates.format(pedido.dataPedido, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.dataRetirada != null ? #dates.format(pedido.dataRetirada, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.dataDevolucao != null ? #dates.format(pedido.dataDevolucao, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.cliente != null ? pedido.cliente.nome : ''}"></td>
+                    <td th:text="${pedido.automovel != null ? (pedido.automovel.marca + ' ' + pedido.automovel.modelo) : ''}"></td>
                     <td>
-                        <a href="/pedidos/edit/[(${pedido.id})]" class="btn-edit">Editar</a>
-                        <a href="/pedidos/delete/[(${pedido.id})]" class="btn-delete">Excluir</a>
-                        <a href="/pedidos/status/[(${pedido.id})]" class="btn-status">Status</a>
+                        <a th:href="@{/pedidos/edit/{id}(id=${pedido.id})}" class="btn-edit">Editar</a>
+                        <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn-delete">Excluir</a>
+                        <a th:href="@{/pedidos/status/{id}(id=${pedido.id})}" class="btn-status">Status</a>
                     </td>
                 </tr>
-                [/]
             </tbody>
         </table>
     </div>

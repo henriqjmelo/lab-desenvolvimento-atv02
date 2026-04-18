@@ -15,42 +15,37 @@
 </head>
 <body>
     <div class="container">
-        <h1>Status do Pedido #[# th:if="${pedido}" ][(${pedido.id})][/]</h1>
+        <h1>Status do Pedido <span th:if="${pedido != null}" th:text="${pedido.id}"></span></h1>
 
-        [# th:if="${pedido}" ]
-        <div class="card">
+        <div class="card" th:if="${pedido != null}">
             <h2>Detalhes do Pedido</h2>
-            <p><strong>Status:</strong> <span class="status">[(${pedido.status})]</span></p>
-            <p><strong>Parecer Financeiro:</strong> [(${pedido.parecer})]</p>
-            <p><strong>Motivo da Rejeicao:</strong> [(${pedido.motivoRejeicao})]</p>
-            <p><strong>Data do Pedido:</strong> [# th:if="${pedido.dataPedido}" ][(${#dates.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')})][/]</p>
-            <p><strong>Data de Retirada:</strong> [# th:if="${pedido.dataRetirada}" ][(${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')})][/]</p>
-            <p><strong>Data de Devolucao:</strong> [# th:if="${pedido.dataDevolucao}" ][(${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')})][/]</p>
-            <p><strong>Valor da Diaria:</strong> [(${pedido.valorDiaria})]</p>
+            <p><strong>Status:</strong> <span class="status" th:text="${pedido.status}"></span></p>
+            <p><strong>Parecer Financeiro:</strong> <span th:text="${pedido.parecer}"></span></p>
+            <p><strong>Motivo da Rejeicao:</strong> <span th:text="${pedido.motivoRejeicao}"></span></p>
+            <p><strong>Data do Pedido:</strong> <span th:if="${pedido.dataPedido != null}" th:text="${#dates.format(pedido.dataPedido, 'dd/MM/yyyy HH:mm')}"></span></p>
+            <p><strong>Data de Retirada:</strong> <span th:if="${pedido.dataRetirada != null}" th:text="${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Data de Devolucao:</strong> <span th:if="${pedido.dataDevolucao != null}" th:text="${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')}"></span></p>
+            <p><strong>Valor da Diaria:</strong> <span th:text="${pedido.valorDiaria}"></span></p>
         </div>
 
-        [# th:if="${pedido.cliente}" ]
-        <div class="card">
+        <div class="card" th:if="${pedido != null and pedido.cliente != null}">
             <h2>Cliente</h2>
-            <p><strong>Nome:</strong> [(${pedido.cliente.nome})]</p>
-            <p><strong>CPF:</strong> [(${pedido.cliente.cpf})]</p>
-            <p><strong>RG:</strong> [(${pedido.cliente.rg})]</p>
-            <p><strong>Endereco:</strong> [(${pedido.cliente.endereco})]</p>
-            <p><strong>Profissao:</strong> [(${pedido.cliente.profissao})]</p>
+            <p><strong>Nome:</strong> <span th:text="${pedido.cliente.nome}"></span></p>
+            <p><strong>CPF:</strong> <span th:text="${pedido.cliente.cpf}"></span></p>
+            <p><strong>RG:</strong> <span th:text="${pedido.cliente.rg}"></span></p>
+            <p><strong>Endereco:</strong> <span th:text="${pedido.cliente.endereco}"></span></p>
+            <p><strong>Profissao:</strong> <span th:text="${pedido.cliente.profissao}"></span></p>
         </div>
-        [/]
 
-        [# th:if="${pedido.automovel}" ]
-        <div class="card">
+        <div class="card" th:if="${pedido != null and pedido.automovel != null}">
             <h2>Automovel</h2>
-            <p><strong>Marca:</strong> [(${pedido.automovel.marca})]</p>
-            <p><strong>Modelo:</strong> [(${pedido.automovel.modelo})]</p>
-            <p><strong>Ano:</strong> [(${pedido.automovel.ano})]</p>
-            <p><strong>Placa:</strong> [(${pedido.automovel.placa})]</p>
-            <p><strong>Matricula:</strong> [(${pedido.automovel.matricula})]</p>
-            <p><strong>Status do Veiculo:</strong> [(${pedido.automovel.statusVeiculo})]</p>
+            <p><strong>Marca:</strong> <span th:text="${pedido.automovel.marca}"></span></p>
+            <p><strong>Modelo:</strong> <span th:text="${pedido.automovel.modelo}"></span></p>
+            <p><strong>Ano:</strong> <span th:text="${pedido.automovel.ano}"></span></p>
+            <p><strong>Placa:</strong> <span th:text="${pedido.automovel.placa}"></span></p>
+            <p><strong>Matricula:</strong> <span th:text="${pedido.automovel.matricula}"></span></p>
+            <p><strong>Status do Veiculo:</strong> <span th:text="${pedido.automovel.statusVeiculo}"></span></p>
         </div>
-        [/]
 
         <div style="margin-top: 20px;">
             <a href="/pedidos">Voltar</a>
