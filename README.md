@@ -190,9 +190,9 @@ Teste funcional manual recomendado:
 
 ## Autores
 
-- Gabriel
+- Gabriel Afonso Infante Vieira
 - Camila
-- Henrqieu
+- Henrque Flores
 
 Professor: Joao Paulo Carneiro Aramuni  
 Instituicao: PUC Minas
