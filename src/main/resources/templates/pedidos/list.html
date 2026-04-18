@@ -1,43 +1,64 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Lista de Pedidos de Aluguel</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Pedidos - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 1200px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .toolbar { margin-bottom: 20px; }
+        .btn { color: white; padding: 10px 16px; text-decoration: none; border-radius: 4px; display: inline-block; margin-right: 8px; }
+        .btn-new { background-color: #28a745; }
+        .btn-financeiro { background-color: #17a2b8; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-edit { background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-status { background-color: #6c757d; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="my-4">Pedidos de Aluguel</h1>
-    <a href="/pedidos/new" class="btn btn-primary mb-3">Adicionar Novo Pedido</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Status</th>
-            <th>Data do Pedido</th>
-            <th>Data de Retirada</th>
-            <th>Data de Devolução</th>
-            <th>Cliente</th>
-            <th>Automóvel</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="pedido : ${pedidos}">
-            <td th:text="${pedido.id}"></td>
-            <td th:text="${pedido.status}"></td>
-            <td th:text="${#dates.format(pedido.dataPedido, 'dd/MM/yyyy')}"></td>
-            <td th:text="${#dates.format(pedido.dataRetirada, 'dd/MM/yyyy')}"></td>
-            <td th:text="${#dates.format(pedido.dataDevolucao, 'dd/MM/yyyy')}"></td>
-            <td th:text="${pedido.cliente.nome}"></td>
-            <td th:text="${pedido.automovel.modelo}"></td>
-            <td>
-                <a th:href="@{/pedidos/edit/{id}(id=${pedido.id})}" class="btn btn-sm btn-info">Editar</a>
-                <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn btn-sm btn-danger">Excluir</a>
-                <a th:href="@{/pedidos/status/{id}(id=${pedido.id})}" class="btn btn-sm btn-secondary">Ver Status</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container">
+        <h1>Pedidos de Aluguel</h1>
+        <div class="toolbar">
+            <a href="/pedidos/new" class="btn btn-new">+ Novo Pedido</a>
+            <a href="/pedidos/analise-financeira" class="btn btn-financeiro">Analise Financeira</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Parecer</th>
+                    <th>Data do Pedido</th>
+                    <th>Retirada</th>
+                    <th>Devolucao</th>
+                    <th>Cliente</th>
+                    <th>Automovel</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pedido : ${pedidos}">
+                    <td th:text="${pedido.id}"></td>
+                    <td th:text="${pedido.status}"></td>
+                    <td th:text="${pedido.parecer}"></td>
+                    <td th:text="${pedido.dataPedido != null ? #dates.format(pedido.dataPedido, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.dataRetirada != null ? #dates.format(pedido.dataRetirada, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.dataDevolucao != null ? #dates.format(pedido.dataDevolucao, 'dd/MM/yyyy') : ''}"></td>
+                    <td th:text="${pedido.cliente != null ? pedido.cliente.nome : ''}"></td>
+                    <td th:text="${pedido.automovel != null ? (pedido.automovel.marca + ' ' + pedido.automovel.modelo) : ''}"></td>
+                    <td>
+                        <a th:href="@{/pedidos/edit/{id}(id=${pedido.id})}" class="btn-edit">Editar</a>
+                        <a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}" class="btn-delete">Excluir</a>
+                        <a th:href="@{/pedidos/status/{id}(id=${pedido.id})}" class="btn-status">Status</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

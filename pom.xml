@@ -39,6 +39,21 @@
             <artifactId>micronaut-data-hibernate-jpa</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-jdbc-hikari</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-jdbc</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micronaut.sql</groupId>
+            <artifactId>micronaut-hibernate-jpa</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
             <groupId>io.micronaut.views</groupId>
             <artifactId>micronaut-views-thymeleaf</artifactId>
         </dependency>

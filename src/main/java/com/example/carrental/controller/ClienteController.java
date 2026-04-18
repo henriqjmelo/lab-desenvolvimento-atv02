@@ -3,6 +3,7 @@ package com.example.carrental.controller;
 import com.example.carrental.model.Cliente;
 import com.example.carrental.service.ClienteService;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -36,10 +37,10 @@ public class ClienteController {
         return new ModelAndView<>("clientes/add-edit", model);
     }
 
-    @Post("/")
+    @Post(value = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> addCliente(@Body Cliente cliente) {
         clienteService.save(cliente);
-        return HttpResponse.redirect("/clientes");
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 
     @Get("/edit/{id}")
@@ -49,16 +50,23 @@ public class ClienteController {
         return new ModelAndView<>("clientes/add-edit", model);
     }
 
-    @Post("/edit/{id}")
-    public HttpResponse<?> updateCliente(@PathVariable Long id, @Body Cliente cliente) {
+    @Post(value = "/edit/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public HttpResponse<?> updateCliente(@PathVariable Long id, @Body Map<String, String> form) {
+        Cliente cliente = clienteService.findById(id).orElse(new Cliente());
         cliente.setId(id);
-        clienteService.save(cliente);
-        return HttpResponse.redirect("/clientes");
+        cliente.setRg(form.getOrDefault("rg", cliente.getRg()));
+        cliente.setCpf(form.getOrDefault("cpf", cliente.getCpf()));
+        cliente.setNome(form.getOrDefault("nome", cliente.getNome()));
+        cliente.setEndereco(form.getOrDefault("endereco", cliente.getEndereco()));
+        cliente.setProfissao(form.getOrDefault("profissao", cliente.getProfissao()));
+        clienteService.update(cliente);
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 
     @Get("/delete/{id}")
     public HttpResponse<?> deleteCliente(@PathVariable Long id) {
         clienteService.deleteById(id);
-        return HttpResponse.redirect("/clientes");
+        return HttpResponse.redirect(java.net.URI.create("/clientes"));
     }
 }
+

@@ -1,40 +1,52 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Lista de Clientes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Clientes - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 1000px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .btn-novo { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-edit { background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="my-4">Clientes</h1>
-    <a href="/clientes/new" class="btn btn-primary mb-3">Adicionar Novo Cliente</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>RG</th>
-            <th>CPF</th>
-            <th>Nome</th>
-            <th>Endereço</th>
-            <th>Profissão</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cliente : ${clientes}">
-            <td th:text="${cliente.id}"></td>
-            <td th:text="${cliente.rg}"></td>
-            <td th:text="${cliente.cpf}"></td>
-            <td th:text="${cliente.nome}"></td>
-            <td th:text="${cliente.endereco}"></td>
-            <td th:text="${cliente.profissao}"></td>
-            <td>
-                <a th:href="@{/clientes/edit/{id}(id=${cliente.id})}" class="btn btn-sm btn-info">Editar</a>
-                <a th:href="@{/clientes/delete/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger">Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container">
+        <h1>Clientes</h1>
+        <a href="/clientes/new" class="btn-novo">+ Novo Cliente</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>RG</th>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Endereco</th>
+                    <th>Profissao</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cliente : ${clientes}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.rg}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.endereco}"></td>
+                    <td th:text="${cliente.profissao}"></td>
+                    <td>
+                        <a th:href="@{/clientes/edit/{id}(id=${cliente.id})}" class="btn-edit">Editar</a>
+                        <a th:href="@{/clientes/delete/{id}(id=${cliente.id})}" class="btn-delete">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

@@ -1,40 +1,58 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Lista de Automóveis</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Automoveis - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 1100px; margin: 20px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .btn-novo { background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-edit { background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+        .btn-delete { background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="my-4">Automóveis</h1>
-    <a href="/automoveis/new" class="btn btn-primary mb-3">Adicionar Novo Automóvel</a>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Matrícula</th>
-            <th>Ano</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Placa</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="automovel : ${automoveis}">
-            <td th:text="${automovel.id}"></td>
-            <td th:text="${automovel.matricula}"></td>
-            <td th:text="${automovel.ano}"></td>
-            <td th:text="${automovel.marca}"></td>
-            <td th:text="${automovel.modelo}"></td>
-            <td th:text="${automovel.placa}"></td>
-            <td>
-                <a th:href="@{/automoveis/edit/{id}(id=${automovel.id})}" class="btn btn-sm btn-info">Editar</a>
-                <a th:href="@{/automoveis/delete/{id}(id=${automovel.id})}" class="btn btn-sm btn-danger">Excluir</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container">
+        <h1>Automoveis</h1>
+        <a href="/automoveis/new" class="btn-novo">+ Novo Automovel</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Matricula</th>
+                    <th>Ano</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Placa</th>
+                    <th>Tipo Propriedade</th>
+                    <th>Proprietario</th>
+                    <th>Status</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="automovel : ${automoveis}">
+                    <td th:text="${automovel.id}"></td>
+                    <td th:text="${automovel.matricula}"></td>
+                    <td th:text="${automovel.ano}"></td>
+                    <td th:text="${automovel.marca}"></td>
+                    <td th:text="${automovel.modelo}"></td>
+                    <td th:text="${automovel.placa}"></td>
+                    <td th:text="${automovel.tipoPropriedade}"></td>
+                    <td th:text="${automovel.nomeProprietario}"></td>
+                    <td th:text="${automovel.statusVeiculo}"></td>
+                    <td>
+                        <a th:href="@{/automoveis/edit/{id}(id=${automovel.id})}" class="btn-edit">Editar</a>
+                        <a th:href="@{/automoveis/delete/{id}(id=${automovel.id})}" class="btn-delete">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

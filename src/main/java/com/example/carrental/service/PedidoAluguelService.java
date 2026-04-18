@@ -28,7 +28,24 @@ public class PedidoAluguelService {
         return pedidoAluguelRepository.save(pedidoAluguel);
     }
 
+    public PedidoAluguel update(PedidoAluguel pedidoAluguel) {
+        return pedidoAluguelRepository.update(pedidoAluguel);
+    }
+
     public void deleteById(Long id) {
         pedidoAluguelRepository.deleteById(id);
     }
+    
+    public List<PedidoAluguel> findByParecer(String parecer) {
+        return pedidoAluguelRepository.findByParecer(parecer);
+    }
+    
+    public List<PedidoAluguel> findByStatus(String status) {
+        return pedidoAluguelRepository.findByStatus(status);
+    }
+    
+    public List<PedidoAluguel> findByClienteId(Long clienteId) {
+        return pedidoAluguelRepository.findByClienteId(clienteId);
+    }
 }
+

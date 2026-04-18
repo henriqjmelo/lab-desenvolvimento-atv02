@@ -7,3 +7,4 @@ import io.micronaut.data.jpa.repository.JpaRepository;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 }
+

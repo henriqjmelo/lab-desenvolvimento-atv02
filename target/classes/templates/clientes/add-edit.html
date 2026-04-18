@@ -1,36 +1,49 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <title>Adicionar/Editar Cliente</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Cliente - Sistema de Aluguel de Carros</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+        .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; }
+        input, button { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 14px; box-sizing: border-box; }
+        button { background-color: #28a745; color: white; cursor: pointer; border: none; }
+        button:hover { background-color: #218838; }
+        a { color: #007bff; text-decoration: none; }
+    </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="my-4" th:text="${cliente.id == null ? 'Adicionar Novo Cliente' : 'Editar Cliente'}"></h1>
-    <form th:action="${cliente.id == null ? '/clientes' : '/clientes/edit/' + cliente.id}" th:object="${cliente}" method="post">
-        <div class="form-group">
-            <label for="rg">RG:</label>
-            <input type="text" id="rg" th:field="*{rg}" class="form-control" required>
+    <div class="container">
+        <h1 th:if="${cliente.id != null}">Editar Cliente</h1>
+        <h1 th:unless="${cliente.id != null}">Novo Cliente</h1>
+        <form method="POST" th:action="${cliente.id != null} ? @{/clientes/edit/{id}(id=${cliente.id})} : @{/clientes/}">
+            <div class="form-group">
+                <label>RG:</label>
+                <input type="text" name="rg" th:value="${cliente.rg}" required>
+            </div>
+            <div class="form-group">
+                <label>CPF:</label>
+                <input type="text" name="cpf" th:value="${cliente.cpf}" required>
+            </div>
+            <div class="form-group">
+                <label>Nome:</label>
+                <input type="text" name="nome" th:value="${cliente.nome}" required>
+            </div>
+            <div class="form-group">
+                <label>Endereco:</label>
+                <input type="text" name="endereco" th:value="${cliente.endereco}" required>
+            </div>
+            <div class="form-group">
+                <label>Profissao:</label>
+                <input type="text" name="profissao" th:value="${cliente.profissao}" required>
+            </div>
+            <button type="submit">Salvar</button>
+        </form>
+        <div style="margin-top: 20px;">
+            <a href="/clientes">Voltar</a>
         </div>
-        <div class="form-group">
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" th:field="*{cpf}" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="endereco">Endereço:</label>
-            <input type="text" id="endereco" th:field="*{endereco}" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label for="profissao">Profissão:</label>
-            <input type="text" id="profissao" th:field="*{profissao}" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Salvar</button>
-        <a href="/clientes" class="btn btn-secondary">Cancelar</a>
-    </form>
-</div>
+    </div>
 </body>
 </html>

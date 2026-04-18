@@ -28,7 +28,12 @@ public class AutomovelService {
         return automovelRepository.save(automovel);
     }
 
+    public Automovel update(Automovel automovel) {
+        return automovelRepository.update(automovel);
+    }
+
     public void deleteById(Long id) {
         automovelRepository.deleteById(id);
     }
 }
+

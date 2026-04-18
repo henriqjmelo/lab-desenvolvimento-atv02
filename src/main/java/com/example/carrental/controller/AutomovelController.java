@@ -3,6 +3,7 @@ package com.example.carrental.controller;
 import com.example.carrental.model.Automovel;
 import com.example.carrental.service.AutomovelService;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
@@ -36,10 +37,10 @@ public class AutomovelController {
         return new ModelAndView<>("automoveis/add-edit", model);
     }
 
-    @Post("/")
+    @Post(value = "/", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> addAutomovel(@Body Automovel automovel) {
         automovelService.save(automovel);
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 
     @Get("/edit/{id}")
@@ -49,16 +50,17 @@ public class AutomovelController {
         return new ModelAndView<>("automoveis/add-edit", model);
     }
 
-    @Post("/edit/{id}")
+    @Post(value = "/edit/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> updateAutomovel(@PathVariable Long id, @Body Automovel automovel) {
         automovel.setId(id);
-        automovelService.save(automovel);
-        return HttpResponse.redirect("/automoveis");
+        automovelService.update(automovel);
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 
     @Get("/delete/{id}")
     public HttpResponse<?> deleteAutomovel(@PathVariable Long id) {
         automovelService.deleteById(id);
-        return HttpResponse.redirect("/automoveis");
+        return HttpResponse.redirect(java.net.URI.create("/automoveis"));
     }
 }
+
