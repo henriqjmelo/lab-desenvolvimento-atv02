@@ -1,82 +1,212 @@
-# Sistema de Aluguel de Carros (LAB02)
+# Sistema de Aluguel de Carros - LAB02
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Linguagem-Java-orange" alt="Java">
-  <img src="https://img.shields.io/badge/Framework-Spring%20Boot-brightgreen" alt="Spring Boot">
-  <img src="https://img.shields.io/badge/Arquitetura-MVC-blue" alt="MVC">
-  <img src="https://img.shields.io/badge/Status-Sprint%2001-yellow" alt="Sprint 01">
+  <img src="https://img.shields.io/badge/Java-11-orange" alt="Java">
+  <img src="https://img.shields.io/badge/Micronaut-3.10.0-blue" alt="Micronaut">
+  <img src="https://img.shields.io/badge/Arquitetura-MVC-brightgreen" alt="MVC">
+  <img src="https://img.shields.io/badge/Status-Prototipo%20Funcional-success" alt="Status">
 </p>
 
-## Descricao do Projeto
+---
 
-Este repositorio contem o desenvolvimento do **Sistema de Aluguel de Carros**, um projeto pratico da disciplina *Laboratorio de Desenvolvimento de Software* (LAB02) do curso de **Engenharia de Software**.
+## Indice
 
-O objetivo e criar uma plataforma web que permita a gestao completa de alugueis de automoveis. O sistema atende a diferentes perfis de usuarios (Clientes, Empresas e Bancos), permitindo desde o cadastro e solicitacao de aluguel ate a analise financeira e formalizacao de contratos de credito.
-
-O projeto e desenvolvido em **Java**, utilizando a arquitetura **MVC** e seguindo um cronograma de desenvolvimento agil dividido em 3 Sprints.
+- [Links Uteis](#links-uteis)
+- [Sobre o Projeto](#sobre-o-projeto)
+- [Funcionalidades Principais](#funcionalidades-principais)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Arquitetura](#arquitetura)
+- [Instalacao e Execucao](#instalacao-e-execucao)
+- [Estrutura de Pastas](#estrutura-de-pastas)
+- [Demonstracao](#demonstracao)
+- [Testes](#testes)
+- [Documentacoes Utilizadas](#documentacoes-utilizadas)
+- [Autores](#autores)
+- [Contribuicao](#contribuicao)
+- [Licenca](#licenca)
 
 ---
 
-## Estrutura do Repositorio (Sprint 01)
+## Links Uteis
 
-Atualmente, o projeto encontra-se na fase de modelagem. Os artefatos disponiveis sao:
-
-- **Diagrama de Casos de Uso**: Representacao das interacoes entre os atores (Clientes e Agentes) e o sistema.
-- **Historias de Usuario**: Detalhamento das funcionalidades sob a otica do usuario final.
-- **Diagrama de Classes**: Modelagem estrutural das entidades (Clientes, Automoveis, Agentes, Contratos).
-- **Diagrama de Pacotes**: Visao logica da organizacao do sistema (Visao Logica/Arquitetural).
-
----
-
-## Funcionalidades Planejadas
-
-- **Cadastro de Usuarios**: Registro obrigatorio para utilizacao do sistema.
-- **Gestao de Pedidos**: Clientes podem introduzir, modificar, consultar e cancelar pedidos de aluguel.
-- **Analise Financeira**: Agentes (Bancos e Empresas) podem avaliar e modificar pedidos de aluguel.
-- **Gestao de Contratos**: Formalizacao de contratos de aluguel e credito, com registro de propriedade dos veiculos.
-- **Multiperfil**: Diferenciacao entre usuarios individuais (clientes) e agentes corporativos.
+- Aplicacao local: http://localhost:8080/clientes
+- Historias de usuario: ./docs/historia-de-usuario.md
+- Historias banco: ./docs/historia-banco
+- Diagramas: ./docs/diagramas
+- Relatorio final: ./RELATORIO_FINAL_LAB02.md
 
 ---
 
-## Regras de Negocio e Dados
+## Sobre o Projeto
 
-| Entidade | Dados Armazenados |
-| :--- | :--- |
-| **Contratantes** | RG, CPF, Nome, Endereco, Profissao, Entidades Empregadoras, Rendimentos (ate 3). |
-| **Automoveis** | Matricula, Ano, Marca, Modelo, Placa. |
-| **Agentes** | Empresas e Bancos responsaveis pela avaliacao e concessao de credito. |
+Este projeto implementa um sistema web para gestao de aluguel de carros no contexto do LAB02. O objetivo e permitir que clientes cadastrem e acompanhem pedidos de aluguel, enquanto agentes (bancos e empresas) realizam analise financeira e decisao de aprovacao.
+
+O sistema resolve a necessidade de centralizar o fluxo de solicitacao de aluguel, validacao financeira e acompanhamento de status em um unico ambiente, com operacoes CRUD para as entidades principais.
 
 ---
 
-## Processo de Desenvolvimento (Sprints)
+## Funcionalidades Principais
 
-O desenvolvimento segue o roteiro estabelecido para o Laboratorio 02:
-
-| Sprint | Atividades | Status |
-| :--- | :--- | :---: |
-| **Lab02S01** | Modelagem (Casos de Uso, Historias, Classes, Pacotes). | Concluido |
-| **Lab02S02** | Revisao, Diagrama de Componentes e CRUD de Cliente (Java/Web). | Pendente |
-| **Lab02S03** | Diagrama de Implantacao e Prototipo Final (Gestao de Aluguel). | Pendente |
+- Autenticacao de usuario (login, cadastro e logout)
+- CRUD de clientes
+- CRUD de automoveis
+- CRUD de pedidos de aluguel
+- Consulta de status do pedido
+- Analise financeira de pedidos por agentes
+- CRUD de agentes (banco/empresa)
+- CRUD de empregadores vinculados ao cliente
 
 ---
 
 ## Tecnologias Utilizadas
 
-- **Linguagem:** Java 17+
-- **Arquitetura:** MVC (Model-View-Controller)
-- **Framework:** Spring Boot / Micronaut
-- **Persistencia:** JPA / Hibernate
-- **Modelagem:** UML (Diagramas de Casos de Uso, Classes, Componentes)
+### Back-end
+
+- Java 11
+- Micronaut 3.10.0
+- Micronaut Data + Hibernate JPA
+- H2 Database
+- Thymeleaf (views server-side)
+
+### Arquitetura
+
+- MVC
+- Camadas de Controller, Service, Repository e Model
+
+### Build
+
+- Maven
+
+---
+
+## Arquitetura
+
+O projeto segue arquitetura MVC com separacao clara de responsabilidades:
+
+- Controller: recebe requisicoes HTTP e monta modelos para as views
+- Service: concentra regras de negocio e orquestracao
+- Repository: acesso aos dados com Micronaut Data JPA
+- Model: entidades de dominio (Cliente, Automovel, PedidoAluguel, Agente, etc)
+- Views: paginas HTML Thymeleaf em src/main/resources/views
+
+Diagramas UML estao disponiveis em ./docs/diagramas.
+
+---
+
+## Instalacao e Execucao
+
+### Pre-requisitos
+
+- Java 11+
+- Maven 3.8+
+
+### Como executar
+
+```bash
+mvn clean compile
+mvn -q dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+```
+
+Depois, execute a aplicacao:
+
+```bash
+java -cp "target/classes;$(cat target/classpath.txt)" com.example.carrental.CarrentalApplication
+```
+
+Em Windows PowerShell:
+
+```powershell
+$cp = 'target/classes;' + (Get-Content target/classpath.txt -Raw).Trim()
+java -cp $cp com.example.carrental.CarrentalApplication
+```
+
+Acesse:
+
+- http://localhost:8080/
+- http://localhost:8080/clientes
+
+---
+
+## Estrutura de Pastas
+
+```text
+.
+├── docs/
+│   ├── diagramas/
+│   ├── historia-de-usuario.md
+│   └── historia-banco
+├── src/main/java/com/example/carrental/
+│   ├── controller/
+│   ├── model/
+│   ├── repository/
+│   └── service/
+├── src/main/resources/
+│   ├── views/
+│   └── templates/
+├── RELATORIO_FINAL_LAB02.md
+└── README.md
+```
+
+---
+
+## Demonstracao
+
+Fluxo principal validado:
+
+1. Cadastro/Login
+2. Cadastro de cliente
+3. Cadastro de automovel
+4. Criacao de pedido
+5. Avaliacao financeira por agente
+6. Consulta do status do pedido
+
+---
+
+## Testes
+
+Compilacao e checagem rapida:
+
+```bash
+mvn clean compile
+mvn test
+```
+
+Teste funcional manual recomendado:
+
+- Abrir telas de clientes, automoveis, pedidos e agentes
+- Executar create/edit/delete nas entidades principais
+- Validar aprovacao/rejeicao em analise financeira
+
+---
+
+## Documentacoes Utilizadas
+
+- Micronaut: https://docs.micronaut.io/latest/guide/
+- Micronaut Data: https://micronaut-projects.github.io/micronaut-data/latest/guide/
+- Thymeleaf: https://www.thymeleaf.org/documentation.html
+- Maven: https://maven.apache.org/guides/
 
 ---
 
 ## Autores
 
-- **Gabriel Afonso Infante Vieira**
-- **Camila** 
-- **Henrique** 
+- Gabriel
+- Camila
+- Henrqieu
+
+Professor: Joao Paulo Carneiro Aramuni  
+Instituicao: PUC Minas
 
 ---
 
-**Professor:** Joao Paulo Carneiro Aramuni  
-**Instituicao:** PUC Minas
+## Contribuicao
+
+1. Crie uma branch para sua alteracao
+2. Faca commits claros
+3. Abra um pull request com descricao objetiva
+
+---
+
+## Licenca
+
+Projeto academico para fins didaticos no LAB02.

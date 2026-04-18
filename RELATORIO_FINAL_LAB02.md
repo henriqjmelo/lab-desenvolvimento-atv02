@@ -1,60 +1,103 @@
-# Relatorio Final - Laboratorio 02: Sistema de Aluguel de Carros
+# Relatorio Final - Sistema de Aluguel de Carros (LAB02)
 
-Este relatorio apresenta o desenvolvimento completo do Sistema de Aluguel de Carros, conforme as especificacoes do Laboratorio 02. O projeto foi dividido em tres sprints, abrangendo desde a modelagem inicial ate a implementacao de um prototipo funcional em Java com Spring Boot e arquitetura MVC.
+## 1. Status do Projeto
 
-## Visao Geral do Projeto
+Projeto academico com prototipo funcional em Java + Micronaut, cobrindo o fluxo principal de cadastro, pedidos de aluguel e analise financeira.
 
-O objetivo principal foi desenvolver um sistema para apoiar a gestao de alugueis de automoveis, permitindo efetuar, cancelar e modificar pedidos atraves da Internet. O sistema foi projetado para ser utilizado por usuarios individuais (clientes) e agentes (empresas e bancos), com funcionalidades especificas para cada perfil.
+## 2. Objetivo
 
-## Fases do Desenvolvimento
+Construir um sistema web para gerenciamento de aluguel de carros, com perfis de cliente e agente, contemplando:
 
-O desenvolvimento seguiu as tres sprints definidas no documento do laboratorio:
+- cadastro e autenticacao
+- criacao e manutencao de pedidos
+- avaliacao financeira dos pedidos
+- acompanhamento de status
 
-### Sprint 01: Modelagem do Sistema (Lab02S01)
+## 3. Escopo Entregue
 
-Nesta fase, foram elaborados os modelos iniciais do sistema, incluindo:
+### 3.1 Funcionalidades implementadas
 
-*   **Diagrama de Casos de Uso**: Identifica as interacoes entre os atores (Cliente e Agente) e as funcionalidades do sistema.
-*   **Historias de Usuario**: Detalham as funcionalidades sob a perspectiva dos usuarios.
-*   **Diagrama de Classes**: Representa a estrutura estatica do sistema, suas classes e relacionamentos.
-*   **Diagrama de Pacotes (Visao Logica)**: Organiza os elementos do sistema em grupos logicos.
+- CRUD de Cliente
+- CRUD de Automovel
+- CRUD de PedidoAluguel
+- CRUD de Agente
+- CRUD de Empregador
+- Login/Cadastro de usuario
+- Tela de analise financeira e avaliacao do pedido
+- Tela de status do pedido
 
-Para mais detalhes, consulte o documento: [Modelagem do Sistema - Lab02S01](./docs/modelagem_system/modelagem_lab02s01.md)
+### 3.2 Funcionalidades modeladas (nao expostas como fluxo completo de UI)
 
-### Sprint 02: Arquitetura e Implementacao Inicial (Lab02S02)
+- ContratoCredito (modelo, repositorio e servico)
 
-Esta fase focou na arquitetura e na implementacao inicial do sistema, com a criacao de:
+## 4. Arquitetura e Tecnologias
 
-*   **Diagrama de Componentes**: Ilustra a estrutura modular do sistema e a interacao entre os componentes.
-*   **Implementacao do CRUD de Cliente**: Desenvolvimento das funcionalidades de Criacao, Leitura, Atualizacao e Exclusao para a entidade `Cliente` utilizando Spring Boot, JPA e Thymeleaf.
+### 4.1 Arquitetura
 
-Para mais detalhes, consulte o documento: [Arquitetura e Implementacao Inicial - Lab02S02](./docs/modelagem_system/arquitetura_implementacao_lab02s02.md)
+- MVC
+- Separacao em Controller, Service, Repository e Model
 
-### Sprint 03: Prototipo Final (Lab02S03)
+### 4.2 Stack tecnica
 
-A fase final envolveu a conclusao do prototipo, incluindo:
+- Java 11
+- Micronaut 3.10.0
+- Micronaut Data JPA + Hibernate
+- Thymeleaf
+- H2 Database
+- Maven
 
-*   **Diagrama de Implantacao**: Mostra a configuracao de hardware e software do sistema.
-*   **Implementacao do CRUD de Automovel**: Desenvolvimento das funcionalidades de Criacao, Leitura, Atualizacao e Exclusao para a entidade `Automovel`.
-*   **Implementacao do CRUD de Pedido de Aluguel**: Desenvolvimento das funcionalidades de Criacao, Leitura, Atualizacao e Exclusao para a entidade `PedidoAluguel`, incluindo a capacidade de criar novos pedidos e visualizar seu status.
+## 5. Artefatos de Documentacao
 
-Para mais detalhes, consulte o documento: [Prototipo Final - Lab02S03](./docs/modelagem_system/prototipo_final_lab02s03.md)
+Os artefatos principais estao no repositorio:
 
-### Instrucoes para Execucao Local (Mac/iPhone)
+- README principal: ./README.md
+- Historias de usuario: ./docs/historia-de-usuario.md
+- Historias banco: ./docs/historia-banco
+- Diagramas: ./docs/diagramas
 
-Para executar o projeto localmente, siga os passos abaixo:
+## 6. Como Executar
 
-1.  **Pre-requisitos**: Certifique-se de ter o Java Development Kit (JDK) versao 11 ou superior e o Apache Maven instalados em sua maquina.
-2.  **Download do Projeto**: Baixe o diretorio `/home/ubuntu/lab02_car_rental_system` para sua maquina local.
-3.  **Navegar ate o Diretorio**: Abra um terminal e navegue ate o diretorio raiz do projeto (onde o arquivo `pom.xml` esta localizado).
-    ```bash
-    cd /caminho/para/lab02_car_rental_system
-    ```
-4.  **Compilar e Executar**: Utilize o Maven para compilar e iniciar a aplicacao Spring Boot.
-    ```bash
-    mvn clean install
-    mvn spring-boot:run
-    ```
-5.  **Acessar a Aplicacao**: Abra seu navegador web e acesse `http://localhost:8080/clientes` para ver a aplicacao em funcionamento.
+### 6.1 Pre-requisitos
 
-Para a entrega final, por favor, faca o commit de todos os artefatos (documentos Markdown, diagramas PNG e codigo-fonte) em um repositorio publico no GitHub, conforme solicitado no documento do laboratorio.
+- Java 11+
+- Maven
+
+### 6.2 Build
+
+```bash
+mvn clean compile
+mvn -q dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+```
+
+### 6.3 Run
+
+PowerShell (Windows):
+
+```powershell
+$cp = 'target/classes;' + (Get-Content target/classpath.txt -Raw).Trim()
+java -cp $cp com.example.carrental.CarrentalApplication
+```
+
+Depois acesse:
+
+- http://localhost:8080/
+- http://localhost:8080/clientes
+
+## 7. Evidencias de Validacao
+
+Durante a consolidacao final do projeto foram validados:
+
+- compilacao sem erros
+- carga das rotas principais (HTTP 200)
+- fluxo CRUD completo das entidades principais
+- fluxo de avaliacao financeira
+- sincronizacao de templates para padrao Thymeleaf
+
+## 8. Time
+
+- Gabriel
+- Camila
+- Henrqieu
+
+Professor: Joao Paulo Carneiro Aramuni  
+Instituicao: PUC Minas
